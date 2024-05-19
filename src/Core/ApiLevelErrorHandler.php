@@ -109,6 +109,8 @@ class ApiLevelErrorHandler
                 throw new ActivityOrRobotAlreadyInstalledException(sprintf('%s - %s', $errorCode, $errorDescription));
             case 'error_activity_validation_failure':
                 throw new ActivityOrRobotValidationFailureException(sprintf('%s - %s', $errorCode, $errorDescription));
+            case '404':
+                throw new WorkflowInstanceNotFoundException(sprintf('%s - %s', $errorCode, $errorDescription));
             default:
                 throw new BaseException(sprintf('%s - %s %s', $errorCode, $errorDescription, $batchErrorPrefix));
         }
