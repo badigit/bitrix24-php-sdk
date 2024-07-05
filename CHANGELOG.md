@@ -60,6 +60,7 @@
 * improve DX - add [Rector](https://github.com/rectorphp/rector) for improve code quality and speed up releases cycle 
 
 ### Changed
+* ❗️ migrate from `ramsey/uuid` to `symfony/uid`
 * ❗️ update scope `telephony`, scope fully rewritten
     * `ExternalCall` – work with external call:
         * `getCallRecordUploadUrl` – get url for upload call record file
@@ -115,7 +116,9 @@
     * add `CrmEntityType` – crm entity type enum
     * add `PbxType` – pbx type enum
     * add `SipRegistrationStatus` – pbx sip line registration status
-* change signature `Bitrix24\SDK\Core\Credentials\AccessToken::getRefreshToken()?string;` - add nullable option for event tokens    
+* change signature `Bitrix24\SDK\Core\Credentials\AccessToken::getRefreshToken()?string;` - add nullable option for event tokens
+* change signature `Bitrix24\SDK\Core\Commands\Command::getName():?string` renamed to `getId():string`
+
 
 ### Deleted
 * remove class `Bitrix24\SDK\Application\Requests\Events\OnApplicationInstall\Auth`
@@ -129,6 +132,7 @@
 
 * fix [typehint for Bitrix24 User entity with field ID](https://github.com/mesilov/bitrix24-php-sdk/issues/382)    
 * fix [default arguments for Bitrix24 User get method](https://github.com/mesilov/bitrix24-php-sdk/issues/381)    
+* fix [limit argument not worked in batch list and read model](https://github.com/mesilov/bitrix24-php-sdk/issues/389)    
 
 ## 2.0-beta.2 — 1.04.2024
 
@@ -214,10 +218,7 @@
 * fix [typehint at ContactItemResult](https://github.com/mesilov/bitrix24-php-sdk/issues/320)
 * fix [return types in DealCategoryItemResult](https://github.com/mesilov/bitrix24-php-sdk/issues/322)
 * fix [add auth node in telephony voximplant events requests](https://github.com/mesilov/bitrix24-php-sdk/issues/331)
-*
-
-fix [add helper metods isError for registerCallResult fortelephony](https://github.com/mesilov/bitrix24-php-sdk/issues/335)
-
+* fix [add helper metods isError for registerCallResult fortelephony](https://github.com/mesilov/bitrix24-php-sdk/issues/335)
 * fix [add return type for crm multifields phone, email, im](https://github.com/mesilov/bitrix24-php-sdk/issues/338)
 * fix errors in `ShowFieldsDescriptionCommand` metadata reader CLI command
 * fix errors for `ApplicationProfile` with empty scope

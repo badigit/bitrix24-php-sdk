@@ -4,79 +4,32 @@ declare(strict_types=1);
 
 namespace Bitrix24\SDK\Core\Commands;
 
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
-/**
- * Class Command
- *
- * @package Bitrix24\SDK\Core\Commands
- */
 class Command
 {
-    /**
-     * @var string
-     */
-    private $apiMethod;
-    /**
-     * @var array
-     */
-    private $parameters;
-    /**
-     * @var null|string
-     */
-    private $name;
-    /**
-     * @var UuidInterface
-     */
-    private $uuid;
-
-    /**
-     * BatchCommand constructor.
-     *
-     * @param string      $apiMethod
-     * @param array       $parameters
-     * @param string|null $name
-     *
-     * @throws \Exception
-     */
-    public function __construct(string $apiMethod, array $parameters, ?string $name = null)
+    public function __construct(
+        private readonly string $apiMethod,
+        private readonly array  $parameters,
+        private ?string         $id = null)
     {
-        $this->uuid = Uuid::uuid4();
-        $this->apiMethod = $apiMethod;
-        $this->parameters = $parameters;
-        $this->name = $name ?? $this->uuid->toString();
+        if ($id === null) {
+            $this->id = (Uuid::v7())->toRfc4122();
+        }
     }
 
-    /**
-     * @return UuidInterface
-     */
-    public function getUuid(): UuidInterface
-    {
-        return $this->uuid;
-    }
-
-    /**
-     * @return string
-     */
     public function getApiMethod(): string
     {
         return $this->apiMethod;
     }
 
-    /**
-     * @return array
-     */
     public function getParameters(): array
     {
         return $this->parameters;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getId(): string
     {
-        return $this->name;
+        return $this->id;
     }
 }
